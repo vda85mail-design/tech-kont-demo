@@ -103,12 +103,15 @@ h3 { font-size: 1.45rem; }
 .card-image, .production-photo, .gallery-item { position: relative; display: block; width: 100%; padding: 0; overflow: hidden; background: #dfeaf1; border: 0; cursor: zoom-in; }
 .card-image { aspect-ratio: 1.36; }
 .card-image img, .production-photo img, .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform .55s var(--ease); }
+.card-image-demo img { object-fit: contain; }
+.demo-image-label { position: absolute; z-index: 3; bottom: 10px; left: 10px; padding: 6px 9px; color: #fff; background: rgba(4,36,84,.82); border-radius: 7px; font-size: .62rem; font-weight: 800; letter-spacing: .02em; }
 .card-image:hover img, .production-photo:hover img, .gallery-item:hover img { transform: scale(1.035); }
 .zoom-icon { position: absolute; z-index: 3; top: 14px; right: 14px; display: grid; width: 38px; height: 38px; place-items: center; color: #fff; background: rgba(8,81,177,.8); border: 1px solid rgba(255,255,255,.6); border-radius: 50%; font-size: 1.3rem; }
 .card-body { padding: 27px 26px 29px; }
 .card-number { display: block; margin-bottom: 17px; color: var(--blue); font-size: .72rem; font-weight: 900; letter-spacing: .14em; }
 .card-body h3 { min-height: 54px; margin-bottom: 13px; color: var(--navy); }
 .card-body p { min-height: 82px; margin: 0 0 21px; color: var(--muted); font-size: .9rem; }
+.card-title-mobile { display: none; }
 .text-link { display: inline-flex; align-items: center; gap: 8px; color: var(--navy); font-size: .82rem; font-weight: 900; text-decoration: none; }
 .text-link span { color: var(--blue); font-size: 1.2rem; }
 
@@ -292,9 +295,12 @@ html.lightbox-open, body.lightbox-open { overflow: hidden; overscroll-behavior: 
   .service-strip { min-height: 54px; border-radius: 11px; }
   .service-icon { display: none; }
   .service-strip strong { font-size: .47rem; }
-  .product-card { display: block; }
-  .card-image { aspect-ratio: 1.35; }
-  .card-body { padding: 24px 21px; }
+  .product-card { display: flex; flex-direction: column; }
+  .card-image { flex: 0 0 auto; height: auto; aspect-ratio: 1.35; }
+  .card-body { display: block; width: 100%; padding: 24px 21px; }
+  .card-body h3, .card-body p { display: block; visibility: visible; }
+  .card-title-desktop { display: none; }
+  .card-title-mobile { display: inline; }
   .production-photo { aspect-ratio: 1; }
   .production-tag { right: 7px; bottom: -24px; width: 185px; padding: 18px; }
   .principles div { grid-template-columns: 1fr; gap: 3px; }

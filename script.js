@@ -230,5 +230,15 @@
     status.className = 'form-status valid';
   });
 
+  const toTop = document.querySelector('.to-top');
+  toTop?.addEventListener('click', (event) => {
+    event.preventDefault();
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: reduceMotion ? 'auto' : 'smooth',
+    });
+  });
+
   document.querySelector('#year').textContent = new Date().getFullYear();
 })();
