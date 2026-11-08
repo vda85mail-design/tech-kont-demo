@@ -104,7 +104,6 @@ h3 { font-size: 1.45rem; }
 .card-image { aspect-ratio: 1.36; }
 .card-image img, .production-photo img, .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform .55s var(--ease); }
 .card-image-demo img { object-fit: contain; }
-.demo-image-label { position: absolute; z-index: 3; bottom: 10px; left: 10px; padding: 6px 9px; color: #fff; background: rgba(4,36,84,.82); border-radius: 7px; font-size: .62rem; font-weight: 800; letter-spacing: .02em; }
 .card-image:hover img, .production-photo:hover img, .gallery-item:hover img { transform: scale(1.035); }
 .zoom-icon { position: absolute; z-index: 3; top: 14px; right: 14px; display: grid; width: 38px; height: 38px; place-items: center; color: #fff; background: rgba(8,81,177,.8); border: 1px solid rgba(255,255,255,.6); border-radius: 50%; font-size: 1.3rem; }
 .card-body { padding: 27px 26px 29px; }
