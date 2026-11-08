@@ -69,28 +69,119 @@
   const lightboxImage = lightbox.querySelector('img');
   const lightboxCaption = lightbox.querySelector('p');
   const lightboxClose = lightbox.querySelector('.lightbox-close');
+  const lightboxPrevious = lightbox.querySelector('.lightbox-prev');
+  const lightboxNext = lightbox.querySelector('.lightbox-next');
+  const lightboxCounter = lightbox.querySelector('.lightbox-counter');
+  const lightboxStage = lightbox.querySelector('.lightbox-stage');
+  const lightboxTriggers = [...document.querySelectorAll('.lightbox-trigger')];
+  const galleryTriggers = [...document.querySelectorAll('#gallery .lightbox-trigger')];
   let lightboxOrigin = null;
+  let galleryIndex = -1;
+  let touchStartX = null;
+  let touchStartY = null;
+  let touchCurrentX = null;
+  let touchCurrentY = null;
+  let horizontalSwipeActive = false;
 
-  document.querySelectorAll('.lightbox-trigger').forEach((trigger) => {
+  const resetTouchState = () => {
+    touchStartX = null;
+    touchStartY = null;
+    touchCurrentX = null;
+    touchCurrentY = null;
+    horizontalSwipeActive = false;
+  };
+
+  const renderLightbox = (trigger) => {
+    const sourceImage = trigger.querySelector('img');
+    const isGalleryImage = galleryIndex >= 0;
+    lightboxImage.src = trigger.dataset.image;
+    lightboxImage.alt = sourceImage?.alt || trigger.dataset.caption || 'Увеличенное изображение';
+    lightboxCaption.textContent = trigger.dataset.caption || '';
+    lightboxPrevious.hidden = !isGalleryImage;
+    lightboxNext.hidden = !isGalleryImage;
+    lightboxCounter.hidden = !isGalleryImage;
+    lightboxCounter.textContent = isGalleryImage ? `${galleryIndex + 1} из ${galleryTriggers.length}` : '';
+  };
+
+  const showGalleryImage = (index) => {
+    if (!galleryTriggers.length) return;
+    galleryIndex = (index + galleryTriggers.length) % galleryTriggers.length;
+    renderLightbox(galleryTriggers[galleryIndex]);
+  };
+
+  lightboxTriggers.forEach((trigger) => {
     trigger.addEventListener('click', () => {
       lightboxOrigin = trigger;
-      lightboxImage.src = trigger.dataset.image;
-      lightboxImage.alt = trigger.dataset.caption || 'Увеличенное изображение';
-      lightboxCaption.textContent = trigger.dataset.caption || '';
+      galleryIndex = galleryTriggers.indexOf(trigger);
+      renderLightbox(trigger);
       lightbox.showModal();
+      document.documentElement.classList.add('lightbox-open');
+      document.body.classList.add('lightbox-open');
+      lightboxClose.focus();
     });
   });
 
   const closeLightbox = () => {
-    lightbox.close();
+    if (lightbox.open) lightbox.close();
+  };
+  const resetLightbox = () => {
     lightboxImage.src = '';
     lightboxOrigin?.focus();
+    lightboxOrigin = null;
+    galleryIndex = -1;
+    resetTouchState();
+    document.documentElement.classList.remove('lightbox-open');
+    document.body.classList.remove('lightbox-open');
   };
+
   lightboxClose.addEventListener('click', closeLightbox);
+  lightboxPrevious.addEventListener('click', () => showGalleryImage(galleryIndex - 1));
+  lightboxNext.addEventListener('click', () => showGalleryImage(galleryIndex + 1));
+  lightbox.addEventListener('close', resetLightbox);
+  lightbox.addEventListener('keydown', (event) => {
+    if (galleryIndex < 0) return;
+    if (event.key === 'ArrowLeft') {
+      event.preventDefault();
+      showGalleryImage(galleryIndex - 1);
+    }
+    if (event.key === 'ArrowRight') {
+      event.preventDefault();
+      showGalleryImage(galleryIndex + 1);
+    }
+  });
+  lightboxStage.addEventListener('touchstart', (event) => {
+    resetTouchState();
+    if (galleryIndex < 0 || event.touches.length !== 1) return;
+    touchStartX = event.touches[0].clientX;
+    touchStartY = event.touches[0].clientY;
+    touchCurrentX = touchStartX;
+    touchCurrentY = touchStartY;
+  }, { passive: true });
+  lightboxStage.addEventListener('touchmove', (event) => {
+    if (galleryIndex < 0 || touchStartX === null || touchStartY === null || event.touches.length !== 1) return;
+    touchCurrentX = event.touches[0].clientX;
+    touchCurrentY = event.touches[0].clientY;
+    const deltaX = touchCurrentX - touchStartX;
+    const deltaY = touchCurrentY - touchStartY;
+    if (horizontalSwipeActive || (Math.abs(deltaX) > 8 && Math.abs(deltaX) > Math.abs(deltaY))) {
+      horizontalSwipeActive = true;
+      event.preventDefault();
+    }
+  }, { passive: false });
+  lightboxStage.addEventListener('touchend', (event) => {
+    if (galleryIndex < 0 || touchStartX === null || touchStartY === null || !event.changedTouches.length) return;
+    const endX = event.changedTouches[0].clientX ?? touchCurrentX;
+    const endY = event.changedTouches[0].clientY ?? touchCurrentY;
+    const deltaX = endX - touchStartX;
+    const deltaY = endY - touchStartY;
+    resetTouchState();
+    if (Math.abs(deltaX) < 45 || Math.abs(deltaX) <= Math.abs(deltaY)) return;
+    event.preventDefault();
+    showGalleryImage(deltaX < 0 ? galleryIndex + 1 : galleryIndex - 1);
+  }, { passive: false });
+  lightboxStage.addEventListener('touchcancel', resetTouchState, { passive: true });
   lightbox.addEventListener('click', (event) => {
-    const box = lightbox.getBoundingClientRect();
-    const outside = event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom;
-    if (outside) closeLightbox();
+    if (event.target === lightbox) closeLightbox();
   });
 
   const form = document.querySelector('#request-form');

@@ -104,6 +104,14 @@
   </main>
 
   <footer class="site-footer"><div class="shell footer-inner"><a class="brand footer-brand" href="#top" aria-label="ТЕХ-КОНТ — наверх">ТЕХ-КОНТ</a><p>© <span id="year"></span> ТЕХ-КОНТ. Информация на сайте не является публичной офертой.</p><a class="to-top" href="#top">Наверх <span>↑</span></a></div></footer>
-  <dialog class="lightbox" id="lightbox" aria-label="Просмотр фотографии"><button class="lightbox-close" type="button" aria-label="Закрыть">×</button><div class="lightbox-stage"><img src="" alt=""><p></p></div></dialog>
+  <dialog class="lightbox" id="lightbox" aria-label="Просмотр фотографии">
+    <button class="lightbox-close" type="button" aria-label="Закрыть">×</button>
+    <button class="lightbox-nav lightbox-prev" type="button" aria-label="Предыдущая фотография" hidden>‹</button>
+    <div class="lightbox-stage">
+      <img src="" alt="">
+      <div class="lightbox-meta"><p></p><span class="lightbox-counter" aria-live="polite" hidden></span></div>
+    </div>
+    <button class="lightbox-nav lightbox-next" type="button" aria-label="Следующая фотография" hidden>›</button>
+  </dialog>
 </body>
 </html>
