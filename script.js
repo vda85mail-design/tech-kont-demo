@@ -65,6 +65,155 @@
     reveals.forEach((element) => revealObserver.observe(element));
   }
 
+  const directionShowcase = document.querySelector('[data-direction-carousel]');
+  if (directionShowcase) {
+    const directionCarousel = directionShowcase.querySelector('.direction-carousel');
+    const directionCards = [...directionShowcase.querySelectorAll('[data-direction-card]')];
+    const directionPrevious = directionShowcase.querySelector('.direction-carousel-prev');
+    const directionNext = directionShowcase.querySelector('.direction-carousel-next');
+    const directionDots = directionShowcase.querySelector('.direction-carousel-dots');
+    let directionIndex = 0;
+    let directionTimer = null;
+    let pointerStartX = null;
+    let pointerStartY = null;
+    let suppressDirectionClick = false;
+
+    directionCards.forEach((card, index) => {
+      const title = card.querySelector('strong')?.textContent.trim() || `Направление ${index + 1}`;
+      card.setAttribute('aria-label', `${index + 1} из ${directionCards.length}: ${title}`);
+      const dot = document.createElement('button');
+      dot.className = 'direction-carousel-dot';
+      dot.type = 'button';
+      dot.setAttribute('aria-label', `Показать направление ${index + 1}: ${title}`);
+      dot.addEventListener('click', () => {
+        showDirection(index);
+        restartDirectionRotation();
+      });
+      directionDots.append(dot);
+    });
+
+    const directionDotButtons = [...directionDots.querySelectorAll('.direction-carousel-dot')];
+
+    function showDirection(index) {
+      directionIndex = (index + directionCards.length) % directionCards.length;
+      directionCards.forEach((card, cardIndex) => {
+        let offset = (cardIndex - directionIndex + directionCards.length) % directionCards.length;
+        if (offset > Math.floor(directionCards.length / 2)) offset -= directionCards.length;
+        card.dataset.position = String(offset);
+        const isActive = offset === 0;
+        card.tabIndex = isActive ? 0 : -1;
+        card.setAttribute('aria-hidden', String(!isActive));
+      });
+      directionDotButtons.forEach((dot, dotIndex) => {
+        if (dotIndex === directionIndex) dot.setAttribute('aria-current', 'true');
+        else dot.removeAttribute('aria-current');
+      });
+    }
+
+    const stopDirectionRotation = () => {
+      if (!directionTimer) return;
+      window.clearInterval(directionTimer);
+      directionTimer = null;
+    };
+
+    const startDirectionRotation = () => {
+      if (reduceMotion || directionTimer || document.hidden) return;
+      directionTimer = window.setInterval(() => showDirection(directionIndex + 1), 4800);
+    };
+
+    function restartDirectionRotation() {
+      stopDirectionRotation();
+      startDirectionRotation();
+    }
+
+    directionPrevious.addEventListener('click', () => {
+      showDirection(directionIndex - 1);
+      restartDirectionRotation();
+    });
+    directionNext.addEventListener('click', () => {
+      showDirection(directionIndex + 1);
+      restartDirectionRotation();
+    });
+
+    directionShowcase.addEventListener('mouseenter', stopDirectionRotation);
+    directionShowcase.addEventListener('mouseleave', startDirectionRotation);
+    directionShowcase.addEventListener('focusin', stopDirectionRotation);
+    directionShowcase.addEventListener('focusout', (event) => {
+      if (!directionShowcase.contains(event.relatedTarget)) startDirectionRotation();
+    });
+
+    directionCarousel.addEventListener('pointerdown', (event) => {
+      if (!event.isPrimary) return;
+      pointerStartX = event.clientX;
+      pointerStartY = event.clientY;
+      suppressDirectionClick = false;
+      stopDirectionRotation();
+    });
+
+    directionCarousel.addEventListener('pointerup', (event) => {
+      if (pointerStartX === null || pointerStartY === null) return;
+      const deltaX = event.clientX - pointerStartX;
+      const deltaY = event.clientY - pointerStartY;
+      pointerStartX = null;
+      pointerStartY = null;
+      if (Math.abs(deltaX) >= 45 && Math.abs(deltaX) > Math.abs(deltaY)) {
+        suppressDirectionClick = true;
+        showDirection(deltaX < 0 ? directionIndex + 1 : directionIndex - 1);
+      }
+      startDirectionRotation();
+    });
+
+    directionCarousel.addEventListener('pointercancel', () => {
+      pointerStartX = null;
+      pointerStartY = null;
+      startDirectionRotation();
+    });
+
+    if (!('PointerEvent' in window)) {
+      directionCarousel.addEventListener('touchstart', (event) => {
+        if (event.touches.length !== 1) return;
+        pointerStartX = event.touches[0].clientX;
+        pointerStartY = event.touches[0].clientY;
+        suppressDirectionClick = false;
+        stopDirectionRotation();
+      }, { passive: true });
+
+      directionCarousel.addEventListener('touchend', (event) => {
+        if (pointerStartX === null || pointerStartY === null || !event.changedTouches.length) return;
+        const deltaX = event.changedTouches[0].clientX - pointerStartX;
+        const deltaY = event.changedTouches[0].clientY - pointerStartY;
+        pointerStartX = null;
+        pointerStartY = null;
+        if (Math.abs(deltaX) >= 45 && Math.abs(deltaX) > Math.abs(deltaY)) {
+          suppressDirectionClick = true;
+          showDirection(deltaX < 0 ? directionIndex + 1 : directionIndex - 1);
+        }
+        startDirectionRotation();
+      }, { passive: true });
+
+      directionCarousel.addEventListener('touchcancel', () => {
+        pointerStartX = null;
+        pointerStartY = null;
+        startDirectionRotation();
+      }, { passive: true });
+    }
+
+    directionCarousel.addEventListener('click', (event) => {
+      if (!suppressDirectionClick) return;
+      event.preventDefault();
+      event.stopPropagation();
+      suppressDirectionClick = false;
+    }, true);
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) stopDirectionRotation();
+      else startDirectionRotation();
+    });
+
+    showDirection(0);
+    startDirectionRotation();
+  }
+
   const lightbox = document.querySelector('#lightbox');
   const lightboxImage = lightbox.querySelector('img');
   const lightboxCaption = lightbox.querySelector('p');
