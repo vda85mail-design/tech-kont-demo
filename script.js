@@ -125,7 +125,7 @@
     if (lightbox.open) lightbox.close();
   };
   const resetLightbox = () => {
-    lightboxImage.src = '';
+    lightboxImage.removeAttribute('src');
     lightboxOrigin?.focus();
     lightboxOrigin = null;
     galleryIndex = -1;
