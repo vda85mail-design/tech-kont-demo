@@ -14,9 +14,9 @@
   <meta property="og:image" content="assets/approved-homepage-reference.png">
   <link rel="canonical" href="https://vda85mail-design.github.io/tech-kont-demo/">
   <link rel="icon" href="assets/logo-tech-kont-original.png" type="image/png">
-  <link rel="preload" href="assets/approved-homepage-reference.png" as="image" fetchpriority="high">
-  <link rel="stylesheet" href="styles.css?v=20261110-seo-carousel">
-  <script src="script.js?v=20261110-seo-carousel" defer></script>
+  <link rel="preload" href="assets/approved-homepage-reference-retouched.png" as="image" fetchpriority="high">
+  <link rel="stylesheet" href="styles.css?v=20261111-all-image-watermarks">
+  <script src="script.js?v=20261111-all-image-watermarks" defer></script>
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -65,6 +65,7 @@
 
         <div class="hero-scene reveal delay-1" role="img" aria-label="Продукция ТЕХ-КОНТ: промышленный контейнер, вагон-дом и офисный модуль">
           <a class="hero-cta" href="#request">Оставить заявку <b aria-hidden="true">→</b></a>
+          <span class="hero-watermark" aria-hidden="true"></span>
           <div class="hero-hotspots" aria-label="Перейти к направлениям продукции">
             <a href="#product-containers" aria-label="Промышленный контейнер"></a>
             <a href="#product-modules" aria-label="Вагон-дом"></a>
@@ -72,41 +73,8 @@
           </div>
         </div>
 
-        <div class="direction-showcase reveal delay-1" data-direction-carousel aria-label="Пять основных направлений производства">
-          <button class="direction-carousel-control direction-carousel-prev" type="button" aria-label="Предыдущее направление">‹</button>
-          <div class="direction-carousel" role="region" aria-roledescription="карусель" aria-label="Основные направления ТЕХ-КОНТ">
-            <a class="direction-card" href="#product-containers" data-direction-card>
-              <img src="assets/photo-blue-container-long.jpg" alt="Промышленный контейнер для размещения оборудования" width="1448" height="1086" loading="eager" decoding="async">
-              <span class="direction-card-shade" aria-hidden="true"></span>
-              <span class="direction-card-copy"><small>Направление 01</small><strong>Контейнеры для ДГУ и компрессоров</strong><span>Исполнение под состав оборудования заказчика</span></span>
-            </a>
-            <a class="direction-card" href="#product-mcod" data-direction-card>
-              <img src="assets/photo-equipment-container.jpg" alt="Промышленный контейнер для размещения инженерного оборудования" width="1448" height="1086" loading="lazy" decoding="async">
-              <span class="direction-card-shade" aria-hidden="true"></span>
-              <span class="direction-card-copy"><small>Направление 02</small><strong>Контейнерные решения для МЦОД</strong><span>Размещение серверного и инженерного оборудования</span></span>
-            </a>
-            <a class="direction-card" href="#product-containers" data-direction-card>
-              <img src="assets/photo-blue-container-portrait.jpg" alt="Синий промышленный контейнер с вентиляционными решётками" width="1086" height="1448" loading="lazy" decoding="async">
-              <span class="direction-card-shade" aria-hidden="true"></span>
-              <span class="direction-card-copy"><small>Направление 03</small><strong>Контейнеры для КТП и насосных станций</strong><span>Промышленное исполнение по требованиям проекта</span></span>
-            </a>
-            <a class="direction-card" href="#product-structures" data-direction-card>
-              <img src="assets/photo-frame-welder.jpg?v=2" alt="Сварочные работы при изготовлении металлического каркаса" width="1448" height="1086" loading="lazy" decoding="async">
-              <span class="direction-card-shade" aria-hidden="true"></span>
-              <span class="direction-card-copy"><small>Направление 04</small><strong>Металлоконструкции на заказ</strong><span>Каркасы и нестандартные конструкции по заданию</span></span>
-            </a>
-            <a class="direction-card" href="#product-modules" data-direction-card>
-              <img src="assets/demo-blue-wagon-house.png" alt="Демонстрационная визуализация синего вагон-дома" width="1448" height="1086" loading="lazy" decoding="async">
-              <span class="direction-card-shade" aria-hidden="true"></span>
-              <span class="direction-card-copy"><small>Направление 05</small><strong>Вагон-дома и офисные модули</strong><span>Модульные здания для работы и проживания</span></span>
-            </a>
-          </div>
-          <button class="direction-carousel-control direction-carousel-next" type="button" aria-label="Следующее направление">›</button>
-          <div class="direction-carousel-dots" aria-label="Выбор направления"></div>
-        </div>
-
         <div class="service-strip reveal delay-2" id="services" aria-label="Услуги компании">
-          <div><span class="service-icon" aria-hidden="true">◇</span><strong>Проектирование</strong></div><div><span class="service-icon" aria-hidden="true">⚒</span><strong>Изготовление</strong></div><div><span class="service-icon" aria-hidden="true">⌁</span><strong>Монтаж</strong></div><div><span class="service-icon" aria-hidden="true">⚙</span><strong>Комплектация</strong></div><div><span class="service-icon" aria-hidden="true">⌂</span><strong>Сервис</strong></div>
+          <div class="service-item" tabindex="0" data-service-description="Разработка технических решений, компоновки и проектной документации с учётом требований заказчика и особенностей будущего объекта."><span class="service-icon" aria-hidden="true">◇</span><strong>Проектирование</strong></div><div class="service-item" tabindex="0" data-service-description="Изготовление контейнеров и металлоконструкций по проектной документации с учётом последующей установки оборудования."><span class="service-icon" aria-hidden="true">⚒</span><strong>Изготовление</strong></div><div class="service-item" tabindex="0" data-service-description="Монтаж конструкций, оборудования и инженерных систем с подготовкой объекта к эксплуатации."><span class="service-icon" aria-hidden="true">⌁</span><strong>Монтаж</strong></div><div class="service-item" tabindex="0" data-service-description="Подбор и комплектация оборудования, материалов и необходимых компонентов в соответствии с требованиями проекта."><span class="service-icon" aria-hidden="true">⚙</span><strong>Комплектация</strong></div><div class="service-item" tabindex="0" data-service-description="Технические консультации по вопросам подбора, размещения и применения оборудования с рекомендациями по оптимальным решениям под конкретные задачи заказчика."><span class="service-icon" aria-hidden="true">⌂</span><strong>Сервис</strong></div>
         </div>
       </div>
     </section>
@@ -115,7 +83,7 @@
       <div class="section-heading reveal"><div><p class="eyebrow">Продукция</p><h2 id="products-title">Основные направления</h2></div><p>Промышленные контейнеры и металлоконструкции под состав оборудования и требования конкретного проекта.</p></div>
       <div class="product-grid">
         <article class="product-card reveal" id="product-containers"><button class="card-image lightbox-trigger" type="button" data-image="assets/photo-blue-container-long.jpg" data-caption="Промышленный контейнер для размещения оборудования"><img src="assets/photo-blue-container-long.jpg" alt="Синий промышленный контейнер для размещения оборудования" width="1448" height="1086" loading="lazy" decoding="async"><span class="zoom-icon" aria-hidden="true">+</span></button><div class="card-body"><span class="card-number">01</span><h3>Контейнеры для ДГУ, компрессоров и промышленного оборудования</h3><p>Промышленные контейнеры для дизель-генераторных установок, компрессорного оборудования, КТП, насосных станций и других установок. Компоновка и оснащение — по техническим требованиям заказчика.</p><a href="#request" class="text-link">Оставить заявку <span>→</span></a></div></article>
-        <article class="product-card reveal delay-1" id="product-mcod"><button class="card-image lightbox-trigger" type="button" data-image="assets/photo-equipment-container.jpg" data-caption="Контейнерное исполнение для размещения оборудования"><img src="assets/photo-equipment-container.jpg" alt="Промышленный контейнер для размещения инженерного оборудования" width="1448" height="1086" loading="lazy" decoding="async"><span class="zoom-icon" aria-hidden="true">+</span></button><div class="card-body"><span class="card-number">02</span><h3>Контейнерные решения для модульных центров обработки данных (МЦОД)</h3><p>Размещение серверного и инженерного оборудования. Контейнерное исполнение и внутренняя компоновка — по требованиям заказчика.</p><a href="#request" class="text-link">Оставить заявку <span>→</span></a></div></article>
+        <article class="product-card reveal delay-1" id="product-mcod"><button class="card-image lightbox-trigger" type="button" data-image="assets/real-white-equipment-container.webp" data-caption="Белый промышленный контейнер для размещения оборудования"><img src="assets/real-white-equipment-container.webp" alt="Реальный белый промышленный контейнер с воздухозаборными козырьками" width="1024" height="768" loading="lazy" decoding="async"><span class="zoom-icon" aria-hidden="true">+</span></button><div class="card-body"><span class="card-number">02</span><h3>Контейнерные решения для модульных центров обработки данных (МЦОД)</h3><p>Размещение серверного и инженерного оборудования. Контейнерное исполнение и внутренняя компоновка — по требованиям заказчика.</p><a href="#request" class="text-link">Оставить заявку <span>→</span></a></div></article>
         <article class="product-card reveal delay-2" id="product-ups"><button class="card-image lightbox-trigger" type="button" data-image="assets/demo-ups-battery-container.jpg" data-caption="Демонстрационная визуализация контейнерного решения для ИБП и аккумуляторных систем"><img src="assets/demo-ups-battery-container.jpg" alt="Демонстрационная визуализация контейнера с аккумуляторными шкафами и оборудованием ИБП" width="1448" height="1086" loading="lazy" decoding="async"><span class="zoom-icon" aria-hidden="true">+</span></button><div class="card-body"><span class="card-number">03</span><h3>Контейнеры для ИБП и аккумуляторных систем</h3><p>Компоновка и оснащение под задачи заказчика с учётом состава размещаемого оборудования и требований проекта.</p><a href="#request" class="text-link">Оставить заявку <span>→</span></a></div></article>
         <article class="product-card reveal" id="product-structures"><button class="card-image lightbox-trigger" type="button" data-image="assets/photo-frame-welder.jpg?v=2" data-caption="Изготовление металлоконструкции на заказ"><img src="assets/photo-frame-welder.jpg?v=2" alt="Сварочные работы на металлическом каркасе" width="1448" height="1086" loading="lazy" decoding="async"><span class="zoom-icon" aria-hidden="true">+</span></button><div class="card-body"><span class="card-number">04</span><h3>Металлоконструкции на заказ</h3><p>Изготовление каркасов и нестандартных металлоконструкций по согласованному заданию.</p><a href="#request" class="text-link">Оставить заявку <span>→</span></a></div></article>
         <article class="product-card reveal delay-1" id="product-modules"><button class="card-image card-image-demo lightbox-trigger" type="button" data-image="assets/demo-blue-wagon-house.png" data-caption="Демонстрационная визуализация синего вагон-дома"><img src="assets/demo-blue-wagon-house.png" alt="Демонстрационная визуализация синего вагон-дома" width="1448" height="1086" loading="lazy" decoding="async"><span class="zoom-icon" aria-hidden="true">+</span></button><div class="card-body"><span class="card-number">05</span><h3>Вагон-дома и офисные модули</h3><p>Модульные здания для проживания персонала, размещения офисов и технических помещений.</p><a href="#request" class="text-link">Оставить заявку <span>→</span></a></div></article>
@@ -167,7 +135,12 @@
 
     <section class="section process" id="process" aria-labelledby="process-title"><div class="shell">
       <div class="section-heading reveal"><div><p class="eyebrow">Порядок сотрудничества</p><h2 id="process-title">Как мы работаем</h2></div><p>Понятная последовательность от первого обращения до изготовления согласованного изделия.</p></div>
-      <ol class="steps"><li class="reveal"><span>01</span><div><h3>Заявка</h3><p>Вы оставляете заявку и рассказываете о своей задаче.</p></div></li><li class="reveal delay-1"><span>02</span><div><h3>Согласование</h3><p>Уточняем технические требования, комплектацию, стоимость и сроки выполнения заказа.</p></div></li><li class="reveal delay-2"><span>03</span><div><h3>Изготовление</h3><p>Изготавливаем продукцию в соответствии с согласованными требованиями.</p></div></li><li class="reveal delay-3"><span>04</span><div><h3>Отгрузка</h3><p>Подготавливаем готовую продукцию к отправке и организуем её передачу заказчику.</p></div></li></ol>
+      <div class="process-cards" role="list" aria-label="Этапы работы">
+        <article class="process-step reveal" role="listitem"><div class="process-step-heading"><span class="process-step-number">1</span><h3>Заявка</h3></div><p>Принимаем вашу заявку по телефону или через сайт</p><div class="process-step-visual"><img src="assets/process/process-01-application-brand.png" alt="Один человек звонит другому" width="525" height="560" loading="lazy" decoding="async"></div></article>
+        <article class="process-step reveal delay-1" role="listitem"><div class="process-step-heading"><span class="process-step-number">2</span><h3>Согласование</h3></div><p>Уточняем требования, параметры и готовим решение</p><div class="process-step-visual"><img src="assets/process/process-02-approval-brand.png" alt="Специалист и заказчик обсуждают проект" width="525" height="560" loading="lazy" decoding="async"></div></article>
+        <article class="process-step reveal delay-2" role="listitem"><div class="process-step-heading"><span class="process-step-number">3</span><h3>Изготовление</h3></div><p>Производим изделие на собственном производстве</p><div class="process-step-visual"><img src="assets/process/process-03-manufacturing-brand.png" alt="Сварочные работы на производстве" width="525" height="560" loading="lazy" decoding="async"></div></article>
+        <article class="process-step reveal delay-3" role="listitem"><div class="process-step-heading"><span class="process-step-number">4</span><h3>Отгрузка</h3></div><p>Организуем доставку готового изделия на объект</p><div class="process-step-visual"><img src="assets/process/process-04-shipping-brand.png" alt="Контейнер подготовлен к отгрузке" width="525" height="560" loading="lazy" decoding="async"></div></article>
+      </div>
     </div></section>
 
     <section class="section contacts" id="contacts" aria-labelledby="contacts-title"><div class="shell contacts-grid">
